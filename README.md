@@ -48,7 +48,7 @@ my_function()
 
 
 ## How does it work?
-Running `pip install -e .` tells python to remember where it should look when you refer to `my_pakage` in some code.
+Running `pip install -e .` tells python to remember where it should look when you refer to `my_package` in some code.
 Whenever you run `import my_package`, it will go to this location, and run the `__init__.py`.
 Inside the `__init__.py`, you have imported or defined some variables (functions, classes, constants, etc), that are now usable in your main script.
 
