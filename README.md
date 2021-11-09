@@ -16,25 +16,26 @@ sys.path.append("the/path/to/some_file.py")
 because when you share your code with other people, this breaks most of the time.
 
 Instead, you should create a python package containing the code you need.
+The following shows how to do it.
 
 ## Package structure
-This repository contains a basic python package.
+This repository contains a basic python package, named `my_package`.
 Its structure is as follows:
 ```
 example_package   (the main directory/folder)
 ├── my_package  (code folder, must have the name of the module)
-│   └── __init__.py   (a special Python file, is executed whenever I import my_package)
-|   └── utils.py   (a regular Python file in which I can define functions, variables, classes, etc)
+│   └── __init__.py   (a special Python file, is executed whenever you import my_package)
+|   └── utils.py   (a regular Python file in which you define functions, variables, classes, etc)
 ├── setup.py  (this special file must be executed to install the package)
 └── README.md   (contains what you are currently reading)
 ```
 
 The mandatory files, which must have exactly this name, are `setup.py` and `my_package/__init__.py`. On the other hand, note that:
 - `utils.py` could have an arbitrary other name
-- `README.md` is not necessary
+- `README.md` is not necessary for a package, and is used here to give information to the people browsing the Github repository
 
 ## Package installation
-Once you have the files defined above, you should open a terminal, move to where the `setup.py` file is (using `cd`), then execute
+Once you have the files defined above, you should open a terminal, move to where the `setup.py` file is (using the `cd` command), then execute
 ```pip install -e .```
 
 After that, **from any location on your computer** you can open an ipython terminal and run:
@@ -42,14 +43,31 @@ After that, **from any location on your computer** you can open an ipython termi
 import my_package
 from my_package import my_function
 my_function()
-# etc, just like when you do: from sklearn.linear_model import Lasso
+# etc, just like when you do: from pandas import read_csv
 ```
 
 
 ## How does it work?
 Running `pip install -e .` tells python to remember where it should look when you refer to `my_pakage` in some code.
 Whenever you run `import my_package`, it will go to this location, and run the `__init__.py`.
-Inside the `__init__.py`, you have imported or defined some variables (functions, classes, constants), that are now usable in your main script.
+Inside the `__init__.py`, you have imported or defined some variables (functions, classes, constants, etc), that are now usable in your main script.
 
-## TODO: submodules
-More advanced note: `my_package` could have submodules, i.e. subfolders inside `my_package`, with their own `__init__.py` file. For example `np.linalg` is a submodule of `numpy`, `sklearn.linear_model` is a submodule of scikit-learn, etc.
+# More advanced
+
+## Submodules
+When you do:
+```
+from sklearn.linear_model import Lasso
+```
+you are using the submodule `linear_model` of `sklearn`.
+When you codebase grows, splitting it into submodules is nice to keep your code organized (for example, all code related to Linear Models go into the `linear_model` submodule; preprocessing go into `sklearn.preprocessing`, etc).
+
+in simple terms, a submodule is a package defined inside a package (meaning it also has its own `__init__.py), using this folder structure:
+```
+example_package
+├── my_package
+    └── __init__.py
+    └── my_submodule
+        └── __init__.py
+```
+usually, the `__init__.py` file import variables defined in other files inside the `my_submodule` folder (not shown here for simplicity).
