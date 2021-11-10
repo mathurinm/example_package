@@ -20,7 +20,7 @@ The following shows how to do it.
 
 ## Package structure
 This repository contains a basic python package, named `my_package`.
-Its structure is as follows:
+Its structure is as follows (ignore the `my_submodule` folder so far):
 ```
 example_package   (the main directory/folder)
 ├── my_package  (code folder, must have the name of the module)
@@ -70,4 +70,22 @@ example_package
     └── my_submodule
         └── __init__.py
 ```
-usually, the `__init__.py` file import variables defined in other files inside the `my_submodule` folder (not shown here for simplicity).
+usually, the `__init__.py` file import variables defined in other files inside the `my_submodule/` folder (not shown here for simplicity).
+Here we just defined one function, `square`, in an auxiliary file inside `my_submodule/`, and we import it inside the submodule's `__init__.py`, thus making it accessible with:
+```python
+from my_package.my_submodule import square
+# similar to: from numpy.linalg import norm
+```
+
+## Unit tests
+You want to make sure that the code you wrote behaves as you expect, and that when you change other parts of the code, you don't break existing parts.
+To automate these checks, you should write unit checks: functions that test the output of your code on some data, and check that it is equal to the value you want in that case. Usually, this check is done through an assertion.
+
+In `my_package/my_submodule/test_submodule.py`, we give an example of such a test: we call our function `square(2)` and check that it returns 4.
+
+You should run your tests regularly (with a *Continuous Integration* - CI, you can do this every time you push to your repo, for example); we recommend using `pytest` (installable with pip/conda).
+
+At the root of the repo, run `pytest` and check the output: in all files starting with `test_`, all functions starting with `test_` are run, and if an assertion inside fails, the test fails.
+
+**Exercice**: modify the content of `test_square` so that the test passes.
+
