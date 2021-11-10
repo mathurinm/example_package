@@ -4,18 +4,18 @@
 It is a good practice to not code the same function twice, and to reuse common code from one python script to the other.
 
 To import the function `some_function` defined in `some_file.py`, you can do:
-```
+```python
 from some_file import some_function
 ```
 but this only works if you run your code in the same folder as `some_file.py`.
 If you want to make `some_function` accessible from anywhere on your computer, *you should not use*
-```
+```python
 import sys
 sys.path.append("the/path/to/some_file.py")
 ```
 because when you share your code with other people, this breaks most of the time.
 
-Instead, you should create a python package containing the code you need.
+Instead, you should **create a python package** containing the code you need.
 The following shows how to do it.
 
 ## Package structure
@@ -39,7 +39,7 @@ Once you have the files defined above, you should open a terminal, move to where
 ```pip install -e .```
 
 After that, **from any location on your computer** you can open an ipython terminal and run:
-```
+```python
 import my_package
 from my_package import my_function
 my_function()
@@ -56,13 +56,13 @@ Inside the `__init__.py`, you have imported or defined some variables (functions
 
 ## Submodules
 When you do:
-```
+```python
 from sklearn.linear_model import Lasso
 ```
 you are using the submodule `linear_model` of `sklearn`.
 When you codebase grows, splitting it into submodules is nice to keep your code organized (for example, all code related to Linear Models go into the `linear_model` submodule; preprocessing go into `sklearn.preprocessing`, etc).
 
-in simple terms, a submodule is a package defined inside a package (meaning it also has its own `__init__.py), using this folder structure:
+in simple terms, a submodule is a package defined inside a package (meaning it also has its own `__init__.py`), using this folder structure:
 ```
 example_package
 ├── my_package
