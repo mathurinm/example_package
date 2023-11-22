@@ -3,4 +3,6 @@
 # as: my_package.my_module.square
 
 def square(x):
+    if x<0:
+        return 10
     return x ** 2
