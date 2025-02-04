@@ -52,6 +52,8 @@ Running `pip install -e .` tells python to remember where it should look when yo
 Whenever you run `import my_package`, it will go to this location, and run the `__init__.py`.
 Inside the `__init__.py`, you have imported or defined some variables (functions, classes, constants, etc), that are now usable in your main script.
 
+The `-e` stands for `--editable`: if you use this flag, changes made to the source code after installation will have repercussions on future uses of the package. If you don't use it, when running `pip install .`, pip will copy the source code in its current state and place it in a different location, hence if you modify the source code, changes will not be taken into account (you'd need to reinstall the package for that).  
+
 # More advanced
 
 ## Submodules
